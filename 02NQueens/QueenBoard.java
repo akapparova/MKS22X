@@ -12,60 +12,128 @@ public class QueenBoard{
 	}		
     }
 
-
-    //first solution it finds becomes the toString(), returns true
-    //if no solution is found, solve() returns false and toString() is modified
-    public boolean solve(){
-	return solveColumn(0);
+    public void solve(){
+	solveColumn(0);
     }
 
-
-    //solves for each column. Recursion happens here! Yay backtracking!
-    public boolean solveColumn(int col){
-	if (col >= board.length){
-	    return true;
-	}
-	else if {}
-	else{
-	}
-    }
     
-
-    //finds all the solutions and adds number to toString()
-    //updates the variable and if there are no solutions, returns false
-    public boolean countSolutions(){
+    private boolean solveColumn(int col){
+        if (col == board.length-1){
+	    for (int row=0 ; row<board.length ; row++){
+		if (board[row][col] == 0){
+		    placeQueen(row,col);
+		    return true;
+		}
+	    }
+	    return false;
+	}
+	for (int row=0 ; row<board.length ; row++){
+	    if (board[row][col]==0){
+		placeQueen(row,col);
+		if (solveColumn(col+1)){
+		    return true;
+		}
+		removeQueen(row,col);
+	    }
+	}
 	return false;
     }
-    
 
-    public string getCount(){
-	return "";
+
+    public void countSolutions(){
+	countSolutionsHelper(0);
+    }
+
+    
+    private void countSolutionsHelper(int col){
+        if (col == board.length){
+	    for (int row = 0; row < board.length; row ++){
+		if (board[row][col] == 0){
+		    solutionCount ++;
+		}
+	    }
+	}
+	for (int row = 0; row < board.length; row ++){
+	    if (board[row][col] == 0){
+		placeQueen (row, col);
+		countSolutionsHelper (col + 1);
+		removeQueen (row, col);
+	    }
+	}
     }
     
 
-    //returns first found solution and number of other solutions found
+    public int getCount(){
+	return solutionCount;
+    }
+    
+
+    private boolean placeQueen(int r, int c){
+	if(board[r][c] == 0){
+	    for(int col = 0; col < board[0].length; col ++){
+		board[r][col] += 1;
+	    }
+
+	    for(int row = 0; row < board.length; row ++){
+		board[row][c] += 1;
+	    }
+
+	    for(int row = r, col = c; row < board.length && col < board.length; row ++, col ++){
+		board[row][col] += 1;
+	    }
+
+	    for(int row = r, col = c; row > -1 && col > -1; row --, col --){
+		board[row][col] += 1;
+	    }
+
+	    for(int row = r, col = c; row > -1 && col < board.length; row --, col ++){
+		board[row][col] += 1;
+	    }
+
+	    for(int row = r, col = c; col > -1 && row < board.length; row ++, col --){
+		board[row][col] += 1; 
+	    }
+
+	    board[r][c] = -1;
+	    return true;
+	}
+	else{
+	    return false;
+	}
+    }
+
+    private boolean removeQueen(int row, int col){
+	int diff = 1;
+	if (board[row][col] != 1){
+	    return false;
+	}
+	board[row][col] = 0;
+	while (col + diff < board[row].length){
+	    board[row][col + diff] ++;
+	    if (row - diff >= 0){
+		board[row - diff][col + diff] ++ ;
+	    }
+	    if (row + diff < board.length){
+		board[row + diff][col + diff] ++ ;
+	    }
+	    diff ++;
+	}
+	return true;
+    }
+
+
     public String toString(){
-	return "";
-    }
-    
-
-    //adds a Queen to a desired spot ( = to -1) and marks off new non-safe spot
-    //(++ that spot)
-    private void addQueen (int r,int c){
-	
-	board[r][c] = -1;
-    }
-    
-
-    //removes a Queen from desired spot (sets to 0) and marks off new safe areas
-    //(-- that spot)
-    private void removeQueen (int r, int c){
-	if (board[r][c] == 0){
+    	String ans = "";
+	for (int row=0 ; row<board.length ; row++){
+	    for (int col=0 ; col<board.length ; col++){
+		if (board[row][col] == -1){
+		    ans += "Q ";
+		}else{
+		    ans += "_ ";
+		}
+	    }
+	    ans += "\n";
 	}
-	else if (board[r][c] > 0){
-	}
-	board[r][c] = ;
+	return ans;
     }
-    
-
 }
