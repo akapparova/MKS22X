@@ -19,6 +19,7 @@ public class KnightBoard{
 	}
 	else{
 	    if (isOnGoodSpot()){
+		
 	    }
 	}
     }
