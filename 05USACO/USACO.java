@@ -29,15 +29,11 @@ public class USACO{
 	    C = text.nextInt();
 	    E = text.nextInt(); 
 	    N = text.nextInt(); 
-	    field = new int[R][C];
-			 
-			 
+	    field = new int[R][C];		 
 	    for(int row = 0; row < R; row ++ )
 		{	
 		    for(int col = 0; col < C; col++){
-			field[row][col] = text.nextInt();}}
-
-		        
+			field[row][col] = text.nextInt();}}	        
 	    for(int i = 0; i < N; i++){
 		R_s = text.nextInt();
 		C_s = text.nextInt();
@@ -45,16 +41,10 @@ public class USACO{
 		stomper(R_s - 1, C_s - 1, D_s);
 		//maxer (2,2 );   
 	    }}
-
-			   
-
-
-
 	catch (FileNotFoundException e){
 	    System.out.println("File Does Not Exist");
 	    System.exit(1);
 	}
-
 
 	for (int k = 0; k < R; k ++){
 	    for (int j = 0; j < C; j ++){
@@ -66,28 +56,17 @@ public class USACO{
 	Volume = Volume * 72 * 72;
 	return Volume;}
 
-
     public static void  stomper (int r, int c, int depth){
 	int max = maxer( r, c);
-
 	for (int i = 0; i < 3 ; i++){
 	    for(int j = 0; j < 3; j ++ ){
 		if (( r + i  > -1) && (r + i < R) && (c + j > -1) &&( c + j < C )){
 		    if (max - field[r + i ][c + j] <= D_s ){
-
 			field [r + i][c  + j] = (field[r + i][c + j] -  (depth - (max - field [r + i][c + j])));
 		    }
-
 		}
 	    }}
-
-    }
-
-
-
-
-
-		    
+    }		    
 
     public static int maxer (int r1, int c1){
 	int result = 0;
@@ -101,7 +80,6 @@ public class USACO{
 	return result; 
     }
 
-
     public static String printer(int [][] ass ){
 	String result = "";
 	for (int k = 0; k < R; k ++){
@@ -109,20 +87,13 @@ public class USACO{
             
                 result += field [k][j] + " ";
            
-            }
-        
+            }    
 	    result += '\n';
 	}
 	return result; }
 
-
-
     public static void main(String[] args) {
-	Bronze("makelake.5.in");
-		 	
-	System.out.println(Volume);
-		
-
-	
+	Bronze("makelake.5.in");		 	
+	System.out.println(Volume);	
     }
 }
