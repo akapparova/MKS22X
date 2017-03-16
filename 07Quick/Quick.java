@@ -8,21 +8,19 @@ public class Quick{
     }
 
     public static int partition(int[] ary, int start, int end){
-	int pivotI = (int)(Math.random() * (end - start));
+	if (start == end) return start;
+	int pivotI = (int) (Math.random() * (end - start + 1)) + start;
 	int value = ary[pivotI];
-	for (int i = start; i < pivotI; i ++){
-	    if (ary[i] > value){
-		swap(ary, i, pivotI);
-		pivotI = i;
-	    }
-	}
-	for (int i = pivotI; i < end; i ++){
+	swap(ary, end, pivotI);
+	int pivoting = start;
+	for (int i = start; i < end; i ++){
 	    if (ary[i] < value){
-		swap(ary, i, pivotI);
-		pivotI = i;
+		swap(ary, pivoting, i);
+		pivoting++;
 	    }
 	}
-	return pivotI;
+	swap(ary, pivoting, end);
+	return pivoting;
     }
 
     public static String print(int[] ary){
@@ -40,15 +38,7 @@ public class Quick{
     // }
 
     public static void main(String[] args){
-	int[]ary = { 2, 10, 15, 23, 0,  5};/*
-					     quickselect( ary , 0 );// would return 0
-					     quickselect( ary , 1 );//  would return 2
-					     quickselect( ary , 2 );//  would return 5
-					     quickselect( ary , 3 );//  would return 10
-					     quickselect( ary , 4 );//  would return 15
-					     quickselect( ary , 5 );//  would return 23
-					   */
-	System.out.println(partition(ary,0,ary.length));
-	System.out.println(print(ary));
+	int[] ary = {4, 3, 5, 77, 100, 2, 41, 32, 45, 21, 11};
+	System.out.println(partition(ary, 0, 5));
     }
 }
