@@ -31,18 +31,22 @@ public class Quick{
 	return ans;
     }
 		   
-
     public static int quickselect(int[] ary, int k){
-	return selectH(ary, k, 0, ary.length -1);
+	return selectH(ary, k, 0, ary.length - 1);
     }
 
     public static int selectH(int[] ary, int k, int start, int end){
-	return 1;
+	int boundarystart;
+	int boundaryend;
+	if (partition(ary, start, end) < k){
+	    ;
     }
 
     public static void main(String[] args){
-	int[] ary = {4, 3, 5, 77, 100, 2, 41, 32, 45, 21, 11};
-	System.out.println(partition(ary, 0, 5));
-	System.out.println(print(ary));
+	int[] data = {10,9,8,7,6,5,5,5,5,5,5,4,3,2,1,0};
+	System.out.println(partition(data, 0, 5));
+	System.out.println(print(data));
+	System.out.println(partition(data, 5, 8));
+	System.out.println(print(data));
     }
 }
