@@ -32,13 +32,17 @@ public class Quick{
     }
 		   
 
-    //public static int quickselect(int[] data, int k){
-    //return the value that is the kth smallest value of the array. 
-    //use your partition method to help you accomplish this.
-    // }
+    public static int quickselect(int[] ary, int k){
+	return selectH(ary, k, 0, ary.length -1);
+    }
+
+    public static int selectH(int[] ary, int k, int start, int end){
+	return 1;
+    }
 
     public static void main(String[] args){
 	int[] ary = {4, 3, 5, 77, 100, 2, 41, 32, 45, 21, 11};
 	System.out.println(partition(ary, 0, 5));
+	System.out.println(print(ary));
     }
 }
