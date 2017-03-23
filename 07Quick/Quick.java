@@ -27,19 +27,26 @@ public class Quick{
 	return pivoting;
     }
 
-    public static int partition(int[] ary, int start, int end){
-	if (start == end) return start;
-	int pivot = (int) (Math.random() * (end - start + 1)) + start;
-	int value = ary[pivot];
-	swap(ary, end, pivot);
-	int pivoting = start;
-
-	int i = ;
-	int lt = start;
+    public static int partition (int[]data,int start, int end){
+	if (start == end) {
+	    return start;
+	}
+	int pivotindex = (int)(Math.random() * (end - start + 1)) + start;
 	int gt = end;
-	
-	
-	return 3;
+	int lt = start;
+	int i = start + 1;
+	int val = data[lt];
+	swap(data, pivotindex, start);
+	while(i <= gt){
+	    if(data[i] == val)i++;
+	    else if(data[i] < val){
+		swap(data,i,lt); i++; lt++;
+	    }
+	    else{
+		swap(data,gt,i); gt--;
+	    }
+	}
+	return lt;		    
     }
 
     public static String printArray(int[] ary){
@@ -50,7 +57,7 @@ public class Quick{
 	return ans;
     }
 
-    public static void quickSort(int[] ary){
+    public static void quicksort(int[] ary){
 	quickSortH(ary, 0, (ary.length - 1));
     }
     
@@ -76,7 +83,8 @@ public class Quick{
 
     public static void main (String[] args){
 	int[] ary = {9,8,8,8,7,7,7,6,5,4,4,4,3,2,1,1,1,0};
-	System.out.println(oldpartition(ary,0,ary.length - 1));
+	System.out.println(quickselect(ary,2));
+        quicksort(ary);
 	System.out.println(printArray(ary));
     }
 }
