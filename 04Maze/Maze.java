@@ -5,20 +5,66 @@ public class Maze{
 
     private char[][]maze;
     private boolean animate;
-    private boolean debug; //ADD THIS IN TO TEST. TEST MAZE WITH NO SOLUTION
 
-    /*Constructor loads a maze text file, and sets animate to false by default.
-      1. The file contains a rectangular ascii maze, made with the following 4 characters:
-      '#' - locations that cannot be moved onto
-      ' ' - locations that can be moved onto
-      'E' - the location of the goal (exactly 1 per file)
-      'S' - the location of the start(exactly 1 per file)
-
-      2. The maze has a border of '#' around the edges. So you don't have to check for out of bounds!
-      3. When the file is not found OR there is no E or S then: print an error and exit the program.
-    */
     public Maze(String filename){
-        //COMPLETE CONSTRUCTOR
+	animate = false;
+        try{
+	    Scanner scanner = new  Scanner(new File(filename));
+	    int atline = 1;
+	    String line = "";
+	    while(scanner.hasNextLine()){
+		line = scanner.nextLine();
+		atline++;
+	    }
+	    int rows = atline;
+	    int cols = line.length();
+	    maze = new char[rows][cols];
+
+
+	    scanner = new Scanner(new File(filename));
+	    atline = 0;
+	    int j = 0;
+	    while(scanner.hasNextLine()){
+		line = scanner.nextLine();
+		for(int i=0;i<line.length();i++){
+		    maze[atline][i]=line.charAt(i);
+		}
+		atline++;
+	    }
+	}
+	catch(FileNotFoundException e){
+	    System.out.println("File not found");
+	    System.exit(0);
+	}
+    }
+
+    public boolean solve(){
+	int startx=0, starty=0;
+	for (int r = 0 ; r < maze.length ; r ++) {
+	    for (int c = 0 ; c < maze[0].length ; c ++) {
+		if (maze[r][c] == 'S') {
+		    startx = r;
+		    starty = c;
+		}
+	    }
+	}
+	maze[startx][starty] = ' ';
+	return solve(startx,starty);
+    }
+
+    private boolean solve(int x, int y){
+        if(animate){
+            System.out.println("\033[2J\033[1;1H" + this);
+            wait(5);
+        }
+	if (maze[x][y] == 'E') return true;
+	if (maze[x][y] != ' ') return false;	
+	if (maze[x][y] == ' ') {
+	    maze[x][y] = '@';
+	    if (solve(x , y + 1) || solve(x , y - 1) || solve(x + 1 , y) || solve(x - 1 , y)) return true;
+	}
+	maze[x][y] = '.';
+        return false;
     }
 
     public void setAnimate(boolean b){
@@ -28,39 +74,23 @@ public class Maze{
     public void clearTerminal(){
         System.out.println("\033[2J");
     }
-
-
-    /*Wrapper Solve Function
-      Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
-    */
-    public boolean solve(){
-	int startx=0,starty=0;
-	//Initialize startx and starty with the location of the S. 
-	maze[startx][starty] = ' ';//erase the S, and start solving!
-	return solve(startx,starty);
+    
+    private void wait(int millis){
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
     }
 
-    /*
-      Recursive Solve function:
-
-      A solved maze has a path marked with '@' from S to E.
-
-      Returns true when the maze is solved,
-      Returns false when the maze has no solution.
-
-      Postcondition:
-      The S is replaced with '@' but the 'E' is not.
-      All visited spots that were not part of the solution are changed to '.'
-      All visited spots that are part of the solution are changed to '@'
-    */
-    private boolean solve(int x, int y){
-        if(animate){
-            System.out.println(this);
-            wait(20);
-        }
-
-        //COMPLETE SOLVE
-        return false; //so it compiles
+    public String toString() {
+	String ans = "";
+	for (int r = 0; r < maze.length; r++) {
+	    ans += "\n";
+	    for (int c = 0 ; c < maze[0].length; c++) {
+		ans += maze[r][c];
+	    }
+	}
+	return ans;
     }
-
 }
