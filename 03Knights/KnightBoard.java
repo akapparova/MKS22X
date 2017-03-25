@@ -43,10 +43,4 @@ public class KnightBoard{
 	}
 	return kboard;
     }
-    
-    public static void main(String[] args){
-	KnightBoard hi = new KnightBoard(5, 5);
-	hi.solve();
-	System.out.println(hi);
-    }
 }
