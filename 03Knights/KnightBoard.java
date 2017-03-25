@@ -1,47 +1,52 @@
 public class KnightBoard{
     private int[][] board;
-
-    public KnightBoard(int startingRows, int startingCols) {
+    private int rows, cols;
+    private int [] cm = {-2,-2,-1,-1,1,1,2,2};
+    private int[] rm = {1,-1,2,-2,1,-1,2,-2};
+    
+    public KnightBoard(int startingRows, int startingCols){
 	board = new int[startingRows][startingCols];
-	for (int i = 0; i < (startingRows * startingCols); i ++){
-	    int row = i / startingRows;
-	    int col = i % startingCols;
-	    board[row][col] = 0;
-	}
+	this.rows = startingRows;
+	this.cols = startingCols;
     }
 
     public void solve() {
 	solveH(0, 0, 1);
     }
 
-    private boolean solveH(int row, int col, int level) {
-	if (level > (board.length * board[0].length)) return true;
-	if (row >= board.length || col >= board[0].length || row < 0 || col < 0) return false;
-	if (board[row][col] == 0) {
-	    board[row][col] = level;
-	    if (solveH(row - 2, col + 1, level + 1) ||
-		solveH(row - 2, col - 1, level + 1) ||
-	        solveH(row - 1, col + 2, level + 1) ||
-		solveH(row + 2, col + 1, level + 1) ||
-		solveH(row + 1, col + 2, level + 1) ||
-		solveH(row + 2, col - 1, level + 1) ||
-		solveH(row + 1, col - 2, level + 1) ||
-		solveH(row - 1, col - 2, level + 1))
-		{return true;}
-	    board[row][col] = 0;
-	}
-	return false;
-    }
-
-    public String toString(){
-	String ans = "";
-	for(int i = 0; i < board.length; i ++){
-	    for(int j = 0; j < board.length; j ++){
-		ans  = ans  + board[j][i] + " ";
+    private boolean solveH(int r, int c, int level){
+	int i = 0;
+	if (rows*cols < level) return true;
+	if (r < 0 || c < 0 || r >=board.length || c >= board[0].length) return false;
+	if (board[r][c] == 0){
+	    board[r][c] = level;
+	    while(i < rm.length){
+		if (solveH (r+cm[i], c+rm[i],level +1)) return (1==1); i+=1;
 	    }
-	    ans += "\n";
+	    board[r][c] = 0;
 	}
-	return ans;
+        return false;
     }
-
+    
+    public String toString(){
+	String kboard = "";
+	for(int r = 0; r < board.length; r ++){
+	    kboard += "\n";
+	    for(int c = 0; c < board[0].length; c ++){
+		if(board[r][c] < 10){
+		    kboard += "_" + board[r][c] + " ";
+		}
+		else{
+		    kboard += "" + board[r][c] + " ";
+		}
+	    }
+	}
+	return kboard;
+    }
+    
+    public static void main(String[] args){
+	KnightBoard hi = new KnightBoard(5, 5);
+	hi.solve();
+	System.out.println(hi);
+    }
 }
