@@ -46,9 +46,4 @@ public class Merge{
 	}
     }
     
-    public static void main (String[] args){
-	int[] a = {2,5,9,123,9034,698,8,930,2,2,2,2,6,5,5,5,5,5,5,5,5,5,5,5};
-	mergesort(a);
-	print(a);
-    }
 }
