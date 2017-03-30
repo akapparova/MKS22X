@@ -2,16 +2,19 @@ public class MyLinkedList{
     LNode start, end;
     int size;
 
-    public MyLinkedList(){}
+    public MyLinkedList(){
+	this.start = null;
+	this.end = null;
+	this.size = 0;
+    }
 
-    public boolean add(int value) {
-	LNode n = new LNode(value);
-	LNode ne = start;
-	for (int i = 0; i < size - 1; i ++) {
-	    ne = ne.next;
+    public boolean add(int value) { //not done!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if (start == null){
+	    //just one
 	}
-	ne.next = n;
-	size += 1;
+	LNode newend = new LNode(value);
+	end.next = newend;
+	end = newend;
 	return true;
     }
     
@@ -36,8 +39,6 @@ public class MyLinkedList{
     
     /*public int get(int index);// return the value of the element at the specified index (0 based)
       public int set(int index, int newvalue);//change the value of the element at the specified index to the newValue, return the old value  
-
-
       public int indexOf(int value);//returns the index of the 1st occurrence of the value in the linked list, -1 if not found.
       public void add(int index, int newValue);// insert a new element at the specified index, 0 at the front, size() at the end. 
       public int remove(int index);// remove the element at the specified index, returns the value removed		       
@@ -60,6 +61,10 @@ public class MyLinkedList{
     }
 
     public static void main(String[] args){
-
+	MyLinkedList list = new MyLinkedList();
+	list.add(3);
+	System.out.println(list);
+	list.add(9);
+	System.out.println(list);
     }
 }
