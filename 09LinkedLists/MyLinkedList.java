@@ -69,10 +69,10 @@ public class MyLinkedList{
 	if(index < 0 || index > size()) throw new IndexOutOfBoundsException();
 	LNode beg = start;
 	LNode z = new LNode(value);
-	int i = 0;
-	while (i < index - 1){
+	//	int i = 0;
+	while (beg.next != null){
 	    beg = beg.next;
-	    i++;
+	    // i++;
 	}
 	LNode temp = beg.next;
 	beg.next = z;
