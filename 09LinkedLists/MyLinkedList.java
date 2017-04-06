@@ -8,11 +8,14 @@ public class MyLinkedList{
 	this.end = null;
 	this.size = 0;
     }
+
     private LNode getNthNode(int n){//n is the index of the node you want
-        LNode node = start;
-	while (node != null){
-	    
-	}
+ 	LNode  node = start;	
+	while(node.next != null && n > 0){
+	    node = node.next;
+	    n--;
+	}	
+	return node;
     }
 
     private void remove(LNode x){
@@ -38,16 +41,16 @@ public class MyLinkedList{
     }
 
     private void insertBefore(LNode toBeAdded, LNode location){}
+    
+    public int size(){
+	return size;
+    }
 
     public boolean add(int value){
     	LNode d = new LNode (value);
     	add (size - 1, value);
     	end = d;
     	return true;
-    }
-    
-    public int size(){
-	return size;
     }
     
     public String toString(){
@@ -198,7 +201,7 @@ public class MyLinkedList{
     public static void main(String[] args){
 	MyLinkedList m = new MyLinkedList();
 	System.out.println(m);
-	//m.add(5);
+	m.add(5);
 	System.out.println(m.debugToString());
 	//other test cases! test all methods!!
     }
