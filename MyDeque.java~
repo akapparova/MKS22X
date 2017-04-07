@@ -1,0 +1,20 @@
+public class MyDeque{
+    public void addFirst(String s){} //throws nullpointer
+    public void addLast(String s){} //throws nullpointer
+
+    public String removeFirst(){}//throws NoSuchElementException if deque is empty
+    public String removeLast(){}//throws no such element if d. is empty
+
+    public String getFirst(){}//throws no such element exception
+    public String getLast(){}//throws no such element exception
+
+    
+
+    public static void main(String[] args){}
+
+
+
+
+
+
+}
