@@ -37,20 +37,25 @@ public class MyLinkedList{
     	}
     } 
 
-    private void insertAfter(LNode toBeAdded, LNode location){
+    private void addBefore(LNode location, LNode toBeAdded){
     }
 
-    private void insertBefore(LNode toBeAdded, LNode location){}
+    private void addAfter(LNode location, LNode toBeAdded){
+	
+    }
     
     public int size(){
 	return size;
     }
 
     public boolean add(int value){
-    	LNode d = new LNode (value);
-    	add (size - 1, value);
-    	end = d;
-    	return true;
+    	// LNode d = new LNode (value);
+    	// add (size - 1, value);
+    	// end = d;
+    	// return true;
+	LNode newEnd = new LNode (value);
+	addAfter(end, newEnd);
+	return true;
     }
     
     public String toString(){
@@ -126,10 +131,10 @@ public class MyLinkedList{
 	if(index < 0 || index > size()) throw new IndexOutOfBoundsException();
 	LNode beg = start;
 	LNode z = new LNode(value);
-	//	int i = 0;
-	while (beg.next != null){
+	int i = 0;
+	while (i < index){
 	    beg = beg.next;
-	    // i++;
+	    i++;
 	}
 	LNode temp = beg.next;
 	beg.next = z;
@@ -201,7 +206,7 @@ public class MyLinkedList{
     public static void main(String[] args){
 	MyLinkedList m = new MyLinkedList();
 	System.out.println(m);
-	m.add(5);
+	m.add(0,5);
 	System.out.println(m.debugToString());
 	//other test cases! test all methods!!
     }
