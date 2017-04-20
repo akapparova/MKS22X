@@ -11,23 +11,22 @@ public class MyLinkedList implements Iterable<Integer>{
 	public MLLIterator(MyLinkedList set){
 	    ll = set;
 	}
+
+	public void remove(){throw new UnsupportedOperationException();}
+
 	
 	public boolean hasNext(){
-	    return ll.size > i;
+	    if (ll.size > i) return true;
+	    return false;
 	}
 	
 	public Integer next(){
 	    if(hasNext()){
-		i ++;
-		return ll.get(i - 1);
+		i += 1; return ll.get(i - 1);
 	    }
-	    else{
-		throw new NoSuchElementException();
-	    }
+	    else{throw new NoSuchElementException();}
 	}
-	public void remove(){
-	    throw new UnsupportedOperationException();
-	}
+
     }
 
     public Iterator<Integer> iterator(){
