@@ -1,11 +1,42 @@
+import java.util.ArrayList;
+
 public class MyHeap{
-    public MyHeap(){}//construct empty max heap
-    public MyHeap(boolean val){} //true: construct empty max heap, false: construct empty min heap.
+    //private boolean isMax;
+    private ArrayList<String> heap;
 
-    public void add(String s){}
-    public String remove(){}
-    public String peek(){}
+    public MyHeap(){
+	heap = new ArrayList<String>;
+	heap.add(0, null);
+    }//construct empty max heap
+   
+    public MyHeap(boolean val){
+	heap = new ArrayList<String>;
+	heap.add(0, null);
 
-    private void pushUp(){}
-    private void pushDown(){}
+	//isMax = val;
+	//if (val){
+	    //construct empty max heap
+	//}
+	//else{
+	    //construct empty min heap
+	    // -1.0 * 
+	//}
+    } 
+
+    public void add(String s){//to bottom, and then pushUp
+	
+    }
+    
+    public String remove(){//from top, and then pushDown
+    }
+    
+    public String peek(){
+	return heap.get(1);
+    }
+
+    private void pushUp(int index){//swapping index with parent
+        
+    }
+    private void pushDown(int index){//swapping index with child
+    }
 }
