@@ -5,42 +5,44 @@ public class ExpressionTree{
 	if (isValue()){
 	    return getValue();
 	}
-	else{
-	    return perform(getOp(),getLeft().evaluate(),getRight().evaluate());
+	else {
+	    if (getOp() == '+') {
+		return getLeft().evaluate() + getRight().evaluate();
+	    }
+	    else if (getOp() == '-') {
+		return getLeft().evaluate() - getRight().evaluate();
+	    }
+	    else if (getOp() == '/') {
+		return getLeft().evaluate() / getRight().evaluate();
+	    }
+	    else {
+		return getLeft().evaluate() * getRight().evaluate();
+	    }
 	}
-    }
-
-    private static double perform(char op, double left, double right){
-	return 0.0;
     }
   
     /*return the expression as an infix notation string with parenthesis*/
     /* The sample tree would be: "( 3 + (2 * 10))"     */
     public String toString(){
-	if (isValue()){
-	    return "" + getValue();}
+	if (isValue()) return "" + getValue();
 	else{
 	    return "(" + getLeft().toString() + " " + getOp() +" " +  getRight() + ")";}
     }
   
-    /*return the expression as a postfix notation string without parenthesis*/
-    /* The sample tree would be: "3 2 10 * +"     */
     public String toStringPostfix(){
-	if (isValue()){
-	    return "(" + getValue();
-	}else{
-	    return "" + getLeft().toString() +" "+ getRight() +" "+ getOp()+ ")";
+	if(isValue()) return getValue() + "";
+	else{
+	    return getLeft().toStringPostfix() + " " + getRight().toStringPostfix() + " " + getOp();
 	}
     }
-  
+    
     /*return the expression as a prefix notation string without parenthesis*/
     /* The sample tree would be: "+ 3 * 2 10"     */
-  
+    
     public String toStringPrefix(){
-	if (isValue()){
-	    return "" + getValue() + ")";
-	}else{
-	    return "(" + getOp() +" "+  getLeft().toString()+" " + getRight();
+	if(isValue())return getValue() + "";
+	else{
+	    return getOp() + " " + getLeft().toStringPrefix() + " " + getRight().toStringPrefix();
 	}
     }
 
