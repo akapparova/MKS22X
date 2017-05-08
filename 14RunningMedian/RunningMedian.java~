@@ -1,0 +1,14 @@
+public class RunningMedian{
+    MyHeap rightMin;//values larger than median, min heap
+    MyHeap leftMax;//values smaller than median, max heap
+    double median;
+    
+    public RunningMedian(){
+	rightMin = new MyHeap();
+	leftMax = new MyHeap();
+    }
+    
+    public void add(int a){}
+    public double getMedian(){return median;}
+
+}
