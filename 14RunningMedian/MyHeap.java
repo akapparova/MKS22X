@@ -27,9 +27,7 @@ public class MyHeap{
     }
 
     public int peek(){
-	if ((heap.size() - 1) == 1){
-	    throw new NoSuchElementException();
-	}else if ((heap.size() - 1) < 1){
+        if ((heap.size() - 1) < 1){
 	    throw new NoSuchElementException();
 	}else{
 	    return heap.get(1);
@@ -77,5 +75,9 @@ public class MyHeap{
 	int removed = heap.remove((heap.size() - 1));
 	pushDown();
 	return removed;
+    }
+
+    public int size(){
+	return heap.size() - 1;
     }
 }

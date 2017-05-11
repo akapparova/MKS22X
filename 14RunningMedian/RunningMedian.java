@@ -1,25 +1,34 @@
 public class RunningMedian{
-    MyHeap rightMin;//values larger than median, min heap
-    MyHeap leftMax;//values smaller than median, max heap
-    double median;
-    
-    public RunningMedian(){
-	rightMin = new MyHeap();
-	leftMax = new MyHeap();
-    }
-    
-    public void add(int a){
-	if (a > median){
-	    //if leftheap size smaller than rightheap size
-	    //else if left heap size == right heap size
-	    if (leftMax.size < rightMin.size){
-	    }else if (leftMax.size > rightMin.size){
-	    }else{}
+    MyHeap lMax = new MyHeap();
+    MyHeap rMin = new MyHeap(false);
+
+    public RunningMedian(){}
+
+    public double getMedian(){ 
+	if (rMin.size() == lMax.size()){
+	    return (1.0 * (lMax.peek() + rMin.peek())) / 2;
+	} else if(lMax.size() > rMin.size()){
+	    return 1.0 * lMax.peek();
+	} else {
+	    return 1.0 * rMin.peek();
 	}
-	else if (a < median){}
-	else{}
     }
+    
+    public void add(int n) {
+	if (lMax.size() == 0){
+	    lMax.add(n);
+	}else if (n < lMax.peek()){
+	    lMax.add(n);
+	}else {
+	    rMin.add(n);
+	}
 
-    public double getMedian(){return median;}
 
+	
+	if (lMax.size() > 1 + rMin.size()) {
+	    rMin.add( lMax.remove() );
+	}else if (rMin.size() > 1 + lMax.size()) {
+	    lMax.add( rMin.remove() );
+	}
+    }
 }
